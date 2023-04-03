@@ -7,5 +7,16 @@
     "mongoose": "^7.0.3",
     "vite": "^4.2.1",
     "vite-plugin-node": "^3.0.2"
-  }
+  },
+  "name": "nodejs",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "dev": "vite"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
