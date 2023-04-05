@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 import { HomePage } from './page/HomePage'
 import { ProductPage } from './page/Product'
 import { getAllProducts } from './api/products'
@@ -10,10 +10,13 @@ import { addCategoryes, deleteCategory, getAllCategoryes, updateCategory } from 
 import { ICategoryes } from './types/categoryes'
 import { AddCategoryPage } from './page/admin/AddCategoryes'
 import { UpdateCategoryPage } from './page/admin/UpdateCategory'
+import { ProductDetails } from './page/ProductDetails'
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([])
   const [categoryes, setCategoryes] = useState<ICategoryes[]>([])
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     getAllProducts().then(({ data }) => setProducts(data))
@@ -21,13 +24,20 @@ function App() {
   }, [])
 
   const onHandelRemove = async (id: string | number) => {
-    deleteCategory(id)
-    await location.reload()
+    const result = confirm("Xóa danh mục sản phẩm!")
+    if (result) {
+      deleteCategory(id)
+      await location.reload()
+    }
   }
 
   const onHandleAdd = async (category: ICategoryes) => {
-    addCategoryes(category)
-    await setCategoryes([...categoryes, category])
+    const result = confirm("Thêm danh mục sản phẩm!")
+    if (result) {
+      addCategoryes(category)
+      await setCategoryes([...categoryes, category])
+      navigate('/admin/categoryes')
+    }
   }
 
   // const onHandleUpdate = () => {
@@ -40,8 +50,8 @@ function App() {
         <Route path='/'>
           <Route index element={<HomePage />} />
           <Route path='products'>
-            <Route index element />
-            <Route path=':id' element />
+            <Route index element={<ProductPage />} />
+            <Route path=':id' element={<ProductDetails />} />
           </Route>
         </Route>
         <Route path='admin'>

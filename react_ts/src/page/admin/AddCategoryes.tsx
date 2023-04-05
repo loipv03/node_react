@@ -10,13 +10,13 @@ interface IProps {
 }
 
 export const AddCategoryPage = (props: IProps) => {
-    const navigate = useNavigate()
+
     const onFinishFailed = (errorInfo: any) => {
         console.log('Failed:', errorInfo)
     }
     const onFinish = (values: any) => {
         props.onAdd(values)
-        navigate('/admin/categoryes')
+
     }
 
     return (

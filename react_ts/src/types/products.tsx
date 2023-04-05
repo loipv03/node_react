@@ -7,3 +7,6 @@ export interface IProduct {
     categoryId: string | number
 }
 
+export interface IProps {
+    product: IProduct[]
+}

@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react"
 import { IProps, IProduct } from "../types/products"
+import { getAllProducts } from "../api/products"
 
-export const ProductPage = (props: IProps) => {
+export const ProductPage = () => {
     const [product, setProduct] = useState<IProduct[]>([])
 
     useEffect(() => {
-        setProduct(props.product)
-    }, [props])
+        getAllProducts().then(({ data }) => setProduct(data))
+    }, [])
     return (
         <div className="max-w-screen-2xl m-auto shadow-md">
             <a href="/add">
