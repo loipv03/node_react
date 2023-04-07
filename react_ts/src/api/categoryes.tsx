@@ -7,7 +7,7 @@ export const getAllCategoryes = () => {
     return instance.get("/categoryes")
 }
 
-export const getOneCategory = (id: Number | String) => {
+export const getOneCategory = (id: Number | String | undefined) => {
     return instance.get(`/categoryes/${id}`)
 }
 
@@ -26,8 +26,8 @@ export const addCategoryes = (product: ICategoryes) => {
         }
     })
 }
-export const updateCategory = (id: Number | String, product: ICategoryes) => {
-    return instance.post(`/categoryes/${id}`, product, {
+export const updateCategory = (product: ICategoryes) => {
+    return instance.patch(`/categoryes/${product._id}`, product, {
         headers: {
             Authorization: `bearer ${token}`
         }

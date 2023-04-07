@@ -45,7 +45,7 @@ export const CategoryManagementPage = (props: IPropsCate) => {
     ];
 
     return (
-        <div>
+        <div className='admin_cate'>
             <Button type="primary"><Link to={'/admin/categoryes/add'}>ADD NEW</Link></Button>
             <Table columns={columns} dataSource={data} />
         </div>

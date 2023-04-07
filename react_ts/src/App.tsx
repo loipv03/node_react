@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { HomePage } from './page/HomePage'
 import { ProductPage } from './page/Product'
@@ -26,23 +27,27 @@ function App() {
   const onHandelRemove = async (id: string | number) => {
     const result = confirm("Xóa danh mục sản phẩm!")
     if (result) {
-      deleteCategory(id)
-      await location.reload()
+      await deleteCategory(id)
+      getAllCategoryes().then(({ data }) => setCategoryes(data))
     }
   }
 
   const onHandleAdd = async (category: ICategoryes) => {
     const result = confirm("Thêm danh mục sản phẩm!")
     if (result) {
-      addCategoryes(category)
-      await setCategoryes([...categoryes, category])
-      navigate('/admin/categoryes')
+      await addCategoryes(category)
+      getAllCategoryes().then(({ data }) => setCategoryes(data))
     }
   }
 
-  // const onHandleUpdate = () => {
+  const onHandleUpdate = async (category: ICategoryes) => {
+    const result = confirm("Update danh mục sản phẩm!")
+    if (result) {
+      await updateCategory(category)
+      getAllCategoryes().then(({ data }) => setCategoryes(data))
 
-  // }
+    }
+  }
 
   return (
     <div className="App">
@@ -59,7 +64,7 @@ function App() {
           <Route path='Categoryes'>
             <Route index element={<CategoryManagementPage category={categoryes} onRemove={onHandelRemove} />} />
             <Route path='add' element={<AddCategoryPage onAdd={onHandleAdd} />} />
-            {/* <Route path='update/:id' element={<UpdateCategoryPage onUpdate={onHandleUpdate} />} /> */}
+            <Route path='update/:id' element={<UpdateCategoryPage onUpdate={onHandleUpdate} />} />
           </Route>
         </Route>
       </Routes>
