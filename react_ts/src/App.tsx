@@ -12,6 +12,7 @@ import { ICategoryes } from './types/categoryes'
 import { AddCategoryPage } from './page/admin/AddCategoryes'
 import { UpdateCategoryPage } from './page/admin/UpdateCategory'
 import { ProductDetails } from './page/ProductDetails'
+import { Signin } from './page/signin'
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([])
@@ -58,6 +59,7 @@ function App() {
             <Route index element={<ProductPage />} />
             <Route path=':id' element={<ProductDetails />} />
           </Route>
+          <Route path='signin' element={<Signin />} />
         </Route>
         <Route path='admin'>
           <Route index element={<Dashboard />} />
