@@ -38,10 +38,9 @@ export const CategoryManagementPage = (props: IPropsCate) => {
             key: 'action',
             render: (record) => (
                 < Space size="middle" >
-                    <Button type="primary"><Link to={`/admin/categoryes/update/${record.key}`}>Update</Link></Button>
+                    <Button type="primary" danger><Link to={`/admin/categoryes/update/${record.key}`}>Update</Link></Button>
                     <Button type="primary" danger onClick={() => removeCategory(record.key)}>Remove</Button>
                 </Space >
-
             ),
         },
     ];
@@ -56,7 +55,7 @@ export const CategoryManagementPage = (props: IPropsCate) => {
 
     return (
         <div className='admin_cate'>
-            <Button type="primary"><Link to={'/admin/categoryes/add'}>ADD NEW</Link></Button>
+            <Button type="primary" danger><Link to={'/admin/categoryes/add'}>ADD NEW</Link></Button>
             <Table columns={columns} dataSource={data} />
         </div>
 
