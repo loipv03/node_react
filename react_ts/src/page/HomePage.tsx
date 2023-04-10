@@ -16,7 +16,7 @@ export const HomePage = () => {
             <header className="w-full h-24 bg-blue-500 flex items-center justify-center">
                 <a href="http://localhost:5173/"><img src="/public/Group 1 (1).svg" className="mr-20" /></a>
                 <div className="search flex">
-                    <input type="text" className="h-8 w-96" />
+                    <input type="text" className="h-8 w-96 pl-3" placeholder="Search" />
                     <div className="btn w-24 bg-blue-800">
                         <button className="w-full p-1 text-white"><i className="fas fa-search" />Tìm kiếm</button>
                     </div>
