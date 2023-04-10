@@ -10,7 +10,7 @@ export const checkPermission = async (req, res, next) => {
         });
     }
 
-    jwt.verify(token, "banThayDat", async (err, payload) => {
+    jwt.verify(token, "phanvanloi", async (err, payload) => {
         if (err === "JsonWebTokenError") {
             return res.status(400).json({
                 message: "Token không hợp lệ",
@@ -30,9 +30,3 @@ export const checkPermission = async (req, res, next) => {
         next();
     });
 };
-
-// Kiểm tra req.headers.authorization có tồn tại hay không?
-// Kiểm tra token có hợp lệ hay không?
-// Dựa vào token để lấy payload, so sánh với id của user trong db
-// Kiểm tra xem quyền của user có đủ để thực hiện hành động hay không?
-// Nếu có thì next(), không thì trả về lỗi
