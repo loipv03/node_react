@@ -1,6 +1,5 @@
--API:
 + sản phẩm và danh mục sản phẩm (CRUD)
 + đăng kí, đăng nhập
-+ phân quyền
++ phân quyền admin vs user
 + private router
-+ 
++ Call API
