@@ -1,7 +1,11 @@
 import { instance } from "./instance";
 import { ICategoryes } from "../types/categoryes";
 
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY0MmJjZTI4MzE3NzljYTk0Y2E5YTlkNSIsImlhdCI6MTY4MDYwMDI1OSwiZXhwIjoxNjgwNjg2NjU5fQ.fRB6dkOA93YAeg05zNKi9k0JFcf8sNY_8GSH5xD9EJw'
+const user = JSON.parse(localStorage.getItem("user") as string)
+
+if (user) {
+    const token = user.accessToken
+}
 
 export const getAllCategoryes = () => {
     return instance.get("/categoryes")

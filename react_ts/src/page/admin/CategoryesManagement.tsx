@@ -3,6 +3,8 @@ import { IProduct } from '../../types/products'
 import { Space, Table, Tag, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { ICategoryes } from '../../types/categoryes';
+import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 interface IPropsCate {
     category: ICategoryes[]
@@ -43,6 +45,14 @@ export const CategoryManagementPage = (props: IPropsCate) => {
             ),
         },
     ];
+
+    const user = JSON.parse(localStorage.getItem("user") as string)
+    const navigate = useNavigate()
+    useEffect(() => {
+        if (user?.user?.role !== "admin") {
+            return navigate('/')
+        }
+    }, [navigate])
 
     return (
         <div className='admin_cate'>
