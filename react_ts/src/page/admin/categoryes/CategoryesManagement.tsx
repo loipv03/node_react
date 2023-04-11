@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { IProduct } from '../../types/products'
+import { IProduct } from '../../../types/products';
 import { Space, Table, Tag, Button } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
-import { ICategoryes } from '../../types/categoryes';
+import { ICategoryes } from '../../../types/categoryes';
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 

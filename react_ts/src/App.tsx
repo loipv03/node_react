@@ -3,17 +3,20 @@ import './App.css'
 import { Routes, Route, useNavigate } from 'react-router-dom'
 import { HomePage } from './page/HomePage'
 import { ProductPage } from './page/Product'
-import { getAllProducts } from './api/products'
+import { addProduct, deleteProduct, getAllProducts, updateProduct } from './api/products'
 import { IProduct } from './types/products'
-import Dashboard from './page/admin/Dashboard'
-import { CategoryManagementPage } from './page/admin/CategoryesManagement'
+import Dashboard from './page/admin/categoryes/Dashboard'
+import { CategoryManagementPage } from './page/admin/categoryes/CategoryesManagement'
 import { addCategoryes, deleteCategory, getAllCategoryes, updateCategory } from './api/categoryes'
 import { ICategoryes } from './types/categoryes'
-import { AddCategoryPage } from './page/admin/AddCategoryes'
-import { UpdateCategoryPage } from './page/admin/UpdateCategory'
+import { AddCategoryPage } from './page/admin/categoryes/AddCategoryes'
+import { UpdateCategoryPage } from './page/admin/categoryes/UpdateCategory'
 import { ProductDetails } from './page/ProductDetails'
 import { Signin } from './page/signin'
 import { Signup } from './page/signup'
+import ProductManagementPage from './page/admin/products/ProductManagement'
+import AddProductPage from './page/admin/products/AddProduct'
+import { UpdateProductPage } from './page/admin/products/UpdateProduct'
 
 function App() {
   const [products, setProducts] = useState<IProduct[]>([])
@@ -26,7 +29,7 @@ function App() {
     getAllCategoryes().then(({ data }) => setCategoryes(data))
   }, [])
 
-  const onHandelRemove = async (id: string | number) => {
+  const handleRemoveCategory = async (id: string | number) => {
     const result = confirm("Xóa danh mục sản phẩm!")
     if (result) {
       await deleteCategory(id)
@@ -34,7 +37,7 @@ function App() {
     }
   }
 
-  const onHandleAdd = async (category: ICategoryes) => {
+  const handleAddCategoryes = async (category: ICategoryes) => {
     const result = confirm("Thêm danh mục sản phẩm!")
     if (result) {
       await addCategoryes(category)
@@ -42,7 +45,7 @@ function App() {
     }
   }
 
-  const onHandleUpdate = async (category: ICategoryes) => {
+  const handleUpdateCategory = async (category: ICategoryes) => {
     const result = confirm("Update danh mục sản phẩm!")
     if (result) {
       await updateCategory(category)
@@ -50,6 +53,34 @@ function App() {
 
     }
   }
+  const removeProduct = async (id: number | string | undefined) => {
+    const result = confirm("Xóa sản phẩm!")
+    if (result) {
+      await deleteProduct(id)
+      getAllProducts().then(({ data }) => setProducts(data))
+    }
+  }
+
+  const handleAddProducts = async (product: IProduct) => {
+    const result = confirm("Thêm sản phẩm!")
+    if (result) {
+      await addProduct(product)
+      getAllProducts().then(({ data }) => setProducts(data))
+    }
+  }
+
+  const handleUpdateProducts = async (product: IProduct) => {
+    const result = confirm("Update sản phẩm!")
+    if (result) {
+      console.log(product);
+
+      await updateProduct(product)
+      getAllProducts().then(({ data }) => setProducts(data))
+
+    }
+  }
+
+
 
   return (
     <div className="App">
@@ -66,9 +97,14 @@ function App() {
         <Route path='admin'>
           <Route index element={<Dashboard />} />
           <Route path='Categoryes'>
-            <Route index element={<CategoryManagementPage category={categoryes} onRemove={onHandelRemove} />} />
-            <Route path='add' element={<AddCategoryPage onAdd={onHandleAdd} />} />
-            <Route path='update/:id' element={<UpdateCategoryPage onUpdate={onHandleUpdate} />} />
+            <Route index element={<CategoryManagementPage category={categoryes} onRemove={handleRemoveCategory} />} />
+            <Route path='add' element={<AddCategoryPage onAdd={handleAddCategoryes} />} />
+            <Route path='update/:id' element={<UpdateCategoryPage onUpdate={handleUpdateCategory} />} />
+          </Route>
+          <Route path='products'>
+            <Route index element={<ProductManagementPage product={products} onRemove={removeProduct} />} />
+            <Route path='add' element={<AddProductPage onAdd={handleAddProducts} />} />
+            <Route path='update/:id' element={<UpdateProductPage onUpdate={handleUpdateProducts} />} />
           </Route>
         </Route>
       </Routes>

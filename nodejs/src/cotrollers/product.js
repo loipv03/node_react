@@ -61,20 +61,19 @@ export const create = async (req, res) => {
 };
 export const update = async (req, res) => {
     try {
-        const { error } = productSchame.validate(req.body)
-        if (error) {
-            return res.json({
-                message: error.details[0].message
-            })
+        const product = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        if (!product) {
+            return res.status(404).json({
+                message: "Không tìm thấy sản phẩm",
+            });
         }
-        const product = await Product.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true })
-        return res.status(201).json({
-            message: "Sửa sản phẩm thành công",
-            product
-        })
+        return res.status(200).json({
+            message: "Sản phẩm đã được cập nhật thành công",
+            data: product,
+        });
     } catch (error) {
-        return res.status(400).json({
-            message: error
-        })
+        return res.status(500).json({
+            message: error,
+        });
     }
 }
