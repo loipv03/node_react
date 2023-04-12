@@ -22,8 +22,6 @@ function App() {
   const [products, setProducts] = useState<IProduct[]>([])
   const [categoryes, setCategoryes] = useState<ICategoryes[]>([])
 
-  const navigate = useNavigate()
-
   useEffect(() => {
     getAllProducts().then(({ data }) => setProducts(data))
     getAllCategoryes().then(({ data }) => setCategoryes(data))
